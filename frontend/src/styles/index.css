@@ -1,0 +1,315 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+/* Ensure proper scrolling behavior */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* CRITICAL: Override Radix Dialog body styles to prevent scroll issues */
+body[data-scroll-locked] {
+  overflow: hidden !important;
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Admin Layout Sidebar - ALWAYS FIXED */
+.admin-sidebar-fixed {
+  position: fixed !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 256px !important;
+  height: 100vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  z-index: 40 !important;
+  transform: translate3d(0, 0, 0) !important;
+  will-change: auto !important;
+}
+
+/* Admin Layout Container */
+.admin-layout-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+  display: flex !important;
+}
+
+/* Admin Main Content - Scrollable area */
+.admin-main-scrollable {
+  flex: 1 !important;
+  height: 100vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  margin-left: 256px !important;
+}
+
+/* RESPONSIVE ADMIN LAYOUT */
+@media (max-width: 1023px) {
+  /* Hide desktop sidebar on mobile/tablet */
+  .admin-sidebar-fixed {
+    display: none !important;
+  }
+  
+  /* Remove margin on mobile */
+  .admin-main-scrollable {
+    margin-left: 0 !important;
+    margin-top: 56px !important; /* Space for mobile header */
+    height: calc(100vh - 56px) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop: Normal layout */
+  .admin-main-scrollable {
+    margin-left: 256px !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* Prevent flicker during navigation */
+.admin-main-scrollable > div {
+  will-change: contents;
+  animation: fadeIn 0.15s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.95;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Smooth transitions for admin pages */
+.admin-page-content {
+  transition: opacity 0.15s ease-in-out;
+}
+
+/* Prevent layout shift */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Flash Sale Countdown Animation */
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.countdown-digit {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Feature Card Hover Effect */
+.feature-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Smooth entrance animation */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.5s ease-out;
+}
+
+/* ==================== SPLASH SCREEN ANIMATIONS ==================== */
+
+/* Pulse Slow Animation */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Shimmer Effect */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Bounce In Animation */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Scale Up Animation */
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scaleUp {
+  animation: scaleUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Rotate In Animation */
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+.animate-rotateIn {
+  animation: rotateIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Glow Animation */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.6);
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* ==================== FLASH SALE INFINITE SCROLL ==================== */
+
+/* Flash Sale Scroll Container */
+.flash-sale-scroll {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Flash Sale Track - Infinite scrolling animation */
+.flash-sale-track {
+  display: flex;
+  gap: 1rem;
+  animation: infiniteScroll 40s linear infinite;
+  width: fit-content;
+}
+
+/* Pause animation on hover */
+.flash-sale-scroll:hover .flash-sale-track {
+  animation-play-state: paused;
+}
+
+/* Flash Sale Item */
+.flash-sale-item {
+  flex-shrink: 0;
+  width: 200px;
+}
+
+/* Responsive width */
+@media (max-width: 640px) {
+  .flash-sale-item {
+    width: 160px;
+  }
+  .flash-sale-track {
+    animation-duration: 30s;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .flash-sale-item {
+    width: 180px;
+  }
+  .flash-sale-track {
+    animation-duration: 35s;
+  }
+}
+
+/* Infinite Scroll Animation */
+@keyframes infiniteScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
